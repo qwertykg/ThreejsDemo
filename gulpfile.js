@@ -8,7 +8,7 @@ gulp.task("compile", function () {
                .pipe(runner("compile.hxml"))
 });
 
-gulp.task('connectDev', function () {
+gulp.task('RunGame', function () {
     connect.server({
         name: 'Dev App',
         root: ['./', 'index'],
