@@ -1,10 +1,8 @@
 package ;
 
-class InitializeGame {
+import startGame.InitializeGame;
 
-    public function new() {
-        trace("Hello World!!!");
-    }
+class Main {
 
     public static function main()
     {

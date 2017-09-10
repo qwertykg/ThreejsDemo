@@ -2,7 +2,6 @@
 
 -js out/game.js
 
--main InitializeGame
+-main Main
 
 -cp src
--cp libs
