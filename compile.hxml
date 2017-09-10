@@ -1,0 +1,8 @@
+-lib threejs
+
+-js out/game.js
+
+-main InitializeGame
+
+-cp src
+-cp libs
