@@ -12,27 +12,43 @@ class InitializeGame {
     var rendererAdapter:RendererAdapter;
     var cameraAdapter:CameraAdapter;
 
-    var cube:Mesh = null;
+    var object:Mesh = null;
 
-    public function new()
-    {
+    public function new() {
         sceneAdapter = new SceneAdapter();
         rendererAdapter = new RendererAdapter();
         cameraAdapter = new CameraAdapter();
 
-        cube = sceneAdapter.addTexturedCube();
+        object = sceneAdapter.addMesh(
+            {
+                shape:"Torus",
+                width:1,
+                height:1,
+                depth:1,
+                radius:0.4,
+                detail:4,
+                segments:100,
+                openEnded:false,
+                radiusTop:1,
+                radiusBottom:1,
+                tube:0.2,
+                radialSegments:100,
+                tubialSegments:100
+            },
+            "crate.jpg"
+        );
 
         renderLoop(0.01);
     }
 
     function renderLoop(rotation:Float) {
         Browser.window.requestAnimationFrame(renderLoop);
-        rotateCube(cube);
+        rotateObject(object);
         rendererAdapter.renderer.render(sceneAdapter.scene, cameraAdapter.camera);
     }
 
-    function rotateCube(cube:Mesh) {
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.05;
+    function rotateObject(object:Mesh) {
+        object.rotation.x += 0.01;
+        object.rotation.y += 0.05;
     }
 }
