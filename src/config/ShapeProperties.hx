@@ -29,6 +29,10 @@ typedef ShapeProperties =
     @:optional var tubialSegments:Int;
     @:optional var arc:Float;
 
+    @:optional var x:Float;
+    @:optional var y:Float;
+    @:optional var z:Float;
+
 
 }
 

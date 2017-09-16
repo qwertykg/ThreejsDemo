@@ -9,4 +9,5 @@ package config;
     var Dodecahedron = "Dodecahedron";
     var Icosahedron = "Icosahedron";
     var Torus = "Torus";
+    var Plane = "Plane";
 }

@@ -1,5 +1,8 @@
 package basicSetupAdapters;
 
+import js.three.Vector3;
+import js.Three;
+import js.three.PlaneGeometry;
 import js.three.Geometry;
 import js.three.MeshBasicMaterial;
 import js.three.TorusGeometry;
@@ -37,6 +40,7 @@ class SceneAdapter {
     public function addMesh(properties:ShapeProperties, ?texture:String):Mesh {
 
         var shapeObject:Geometry;
+        var texture = new TextureLoader().load('art/$texture');
 
         switch(properties.shape)
         {
@@ -61,15 +65,32 @@ class SceneAdapter {
             case Shapes.Torus:
                 shapeObject = new TorusGeometry(properties.radius, properties.tube, properties.radialSegments, properties.tubialSegments, properties.arc);
 
+            case Shapes.Plane:
+                texture.wrapS = Three.RepeatWrapping;
+                texture.wrapT = Three.RepeatWrapping;
+                texture.repeat.set(100, 100);
+
+                shapeObject = new PlaneGeometry( properties.width, properties.height, properties.widthSegments, properties.heightSegments );
+                shapeObject.rotateX(-Math.PI / 2);
+
             default:
-                shapeObject = new BoxGeometry(1,1,1);
+                shapeObject = new BoxGeometry(1, 1, 1);
         }
 
-        var material =  new MeshLambertMaterial({
-            map: new TextureLoader().load('art/$texture')
+
+        var material = new MeshLambertMaterial({
+            map: texture
         });
 
         var shapeMesh:Mesh = new Mesh(shapeObject, material);
+
+        if(Reflect.hasField(properties,"x") || Reflect.hasField(properties,"y") || Reflect.hasField(properties,"z"))
+        {
+            shapeMesh.translateX(properties.x);
+            shapeMesh.translateY(properties.y);
+            shapeMesh.translateZ(properties.z);
+        }
+
         scene.add(shapeMesh);
 
         return shapeMesh;
